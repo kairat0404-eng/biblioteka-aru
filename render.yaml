@@ -1,0 +1,14 @@
+# Настройки для хостинга Render (https://render.com): New → Blueprint → этот репозиторий.
+# Ключ Gemini Render спросит при создании; в репозиторий он не попадает.
+services:
+  - type: web
+    name: biblioteka-aru
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: TRUST_PROXY
+        value: "1"

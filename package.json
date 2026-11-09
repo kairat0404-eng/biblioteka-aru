@@ -1,0 +1,21 @@
+{
+  "name": "neb-arsu-search",
+  "version": "1.0.0",
+  "description": "Онлайн-поиск по электронной библиотеке АРУ им. К. Жубанова (neb.arsu.kz): сайт + PWA-приложение",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.6.0",
+    "@google/genai": "^3.0.0",
+    "@napi-rs/canvas": "^1.1.0",
+    "pdfjs-dist": "^6.5.438",
+    "tesseract.js": "^7.0.0",
+    "zod": "^4.6.7"
+  }
+}
