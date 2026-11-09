@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Библиотека АРУ</title>
+  <meta name="description" content="Онлайн-поиск по электронной библиотеке АРУ им. К. Жубанова (neb.arsu.kz)">
+  <meta name="theme-color" content="#1d4e89">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Библиотека АРУ">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="/icon.svg" alt="" width="36" height="36">
+      <div>
+        <h1 data-i18n="title">Электронная библиотека</h1>
+        <p data-i18n="subtitle">АРУ им. К. Жубанова · поиск онлайн</p>
+      </div>
+    </div>
+    <div class="lang" role="group" aria-label="Язык">
+      <button data-lang="ru" class="active">RU</button>
+      <button data-lang="kk">ҚАЗ</button>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-tab="ask" class="active" data-i18n="tabAsk">Спросить</button>
+    <button role="tab" data-tab="search" data-i18n="tabSearch">Поиск</button>
+    <button role="tab" data-tab="catalog" data-i18n="tabCatalog">Каталоги</button>
+    <button role="tab" data-tab="fav" data-i18n="tabFav">Избранное</button>
+  </nav>
+
+  <main>
+    <section id="tab-ask" class="panel">
+      <form id="ask-form" autocomplete="off">
+        <textarea id="ask-q" rows="2" enterkeyhint="send" data-i18n-ph="askPlaceholder" placeholder="Например: найди информацию про битву за Ленинград"></textarea>
+        <button type="submit" class="primary ask-btn" data-i18n="ask">Спросить</button>
+      </form>
+      <div id="ask-examples" class="history"></div>
+      <ol id="ask-steps" class="steps" hidden>
+        <li data-step="plan" data-i18n="stepPlan">Разбираю вопрос</li>
+        <li data-step="search" data-i18n="stepSearch">Ищу в каталоге neb.arsu.kz</li>
+        <li data-step="answer" data-i18n="stepAnswer">Собираю ответ</li>
+      </ol>
+      <div id="ask-queries" class="queries"></div>
+      <div id="ask-status" class="status" aria-live="polite"></div>
+      <article id="ask-answer" class="answer" hidden></article>
+      <p id="ask-note" class="note" hidden data-i18n="askNote">Текст ответа составлен ИИ на основе общих знаний. Из библиотеки взяты только найденные книги, номера [n] ведут к ним. Важные факты сверяйте по источникам.</p>
+      <details id="ask-sources" hidden>
+        <summary></summary>
+        <ol class="results numbered" id="ask-sources-list"></ol>
+      </details>
+    </section>
+
+    <section id="tab-search" class="panel" hidden>
+      <form id="search-form" autocomplete="off">
+        <div class="search-row">
+          <input id="q" type="search" enterkeyhint="search" data-i18n-ph="placeholder" placeholder="Название, автор или ключевые слова…">
+          <button type="submit" class="primary" data-i18n="find">Найти</button>
+        </div>
+        <div class="chips" id="type-chips"></div>
+        <details id="filters">
+          <summary data-i18n="filters">Фильтры</summary>
+          <div class="filters-grid">
+            <label><span data-i18n="theme">Тематика</span><select id="f-theme"></select></label>
+            <label><span data-i18n="edition">Вид издания</span><select id="f-edition"></select></label>
+            <label><span data-i18n="language">Язык ресурса</span><select id="f-language"></select></label>
+          </div>
+        </details>
+      </form>
+      <div id="history" class="history"></div>
+      <div id="search-status" class="status" aria-live="polite"></div>
+      <ul id="search-results" class="results"></ul>
+      <button id="search-more" class="more" hidden data-i18n="more">Показать ещё</button>
+    </section>
+
+    <section id="tab-catalog" class="panel" hidden>
+      <div id="crumbs" class="crumbs"></div>
+      <div id="catalog-status" class="status" aria-live="polite"></div>
+      <ul id="catalog-list" class="cards"></ul>
+      <ul id="catalog-results" class="results"></ul>
+      <button id="catalog-more" class="more" hidden data-i18n="more">Показать ещё</button>
+    </section>
+
+    <section id="tab-fav" class="panel" hidden>
+      <div id="fav-status" class="status"></div>
+      <ul id="fav-results" class="results"></ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span data-i18n="source">Данные в реальном времени с</span> <a href="https://neb.arsu.kz" target="_blank" rel="noopener">neb.arsu.kz</a>
+  </footer>
+
+  <template id="tpl-item">
+    <li class="item">
+      <div class="item-body">
+        <a class="item-title" target="_blank" rel="noopener"></a>
+        <div class="item-authors"></div>
+        <div class="item-meta"><span class="item-type"></span><span class="item-edition"></span></div>
+      </div>
+      <div class="item-actions">
+        <a class="btn open" target="_blank" rel="noopener" data-i18n="open">Открыть</a>
+        <button class="btn star" aria-label="В избранное">☆</button>
+        <button class="btn share" aria-label="Поделиться">↗</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="/app.js"></script>
+</body>
+</html>
