@@ -1,5 +1,5 @@
 // Кэшируем оболочку приложения; запросы /api всегда идут в сеть (данные онлайн).
-const CACHE = 'neb-app-v3';
+const CACHE = 'neb-app-v4';
 const SHELL = ['/', '/index.html', '/style.css', '/app.js', '/icon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {

@@ -150,7 +150,14 @@ details#filters summary { cursor: pointer; color: var(--muted); font-size: 14px;
   border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface);
 }
 #ask-form textarea:focus { outline: 2px solid var(--brand); outline-offset: -1px; }
-.ask-btn { min-width: 96px; }
+.ask-btn { min-width: 96px; white-space: nowrap; }
+@media (max-width: 520px) {
+  /* На телефоне кнопка под полем во всю ширину, чтобы поле вопроса не было узким. */
+  #ask-form { flex-direction: column; }
+  .ask-btn { padding: 12px 18px; }
+  .tabs { gap: 2px; padding: 8px 10px; }
+  .tabs button { white-space: nowrap; font-size: 14px; padding: 8px 4px; }
+}
 
 .steps { list-style: none; padding: 0; margin: 16px 0 0; display: grid; gap: 6px; font-size: 14px; color: var(--muted); }
 .steps li::before { content: '○'; display: inline-block; width: 22px; }
